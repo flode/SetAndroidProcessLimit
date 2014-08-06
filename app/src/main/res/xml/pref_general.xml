@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="number_of_processes"
+        android:title="@string/pref_process_limits"
+        android:defaultValue="-1"
+        android:entries="@array/pref_process_limits_values"
+        android:entryValues="@array/pref_process_limits_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
+</PreferenceScreen>
