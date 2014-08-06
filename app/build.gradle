@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "de.florian.processlimit"
-        minSdkVersion 17
+        minSdkVersion 13
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"

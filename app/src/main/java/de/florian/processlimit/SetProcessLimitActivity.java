@@ -60,8 +60,18 @@ public class SetProcessLimitActivity extends PreferenceActivity {
 
     public static void setProcessLimit(int limit) {
         Log.d("de.florian.processlimit","New limit: " + Integer.toString(limit));
+        DexFile df;
         try {
-            DexFile df = new DexFile(new File("/system/priv-app/Settings.apk"));
+            df = new DexFile(new File("/system/priv-app/Settings.apk"));
+        } catch (IOException e) {
+            try {
+            df = new DexFile(new File("/system/app/Settings.apk"));
+            } catch (IOException e2) {
+                e.printStackTrace();
+                return;
+            }
+        }
+        try {
             Class ActivityManagerNative = Class.forName("android.app.ActivityManagerNative");
             Class IActivityManager = Class.forName("android.app.IActivityManager");
 
@@ -80,8 +90,7 @@ public class SetProcessLimitActivity extends PreferenceActivity {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 }
