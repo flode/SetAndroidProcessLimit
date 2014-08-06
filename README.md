@@ -10,4 +10,4 @@ Set Android background process limit on boot.
 The process limit will also automatically be set when the device is restarted.
 
 
-Caution: Only tested on Android 4.4.4, should work from 4.2 onward
+Caution: Only tested on Android 4.4.4, should work from 4.0 onward
