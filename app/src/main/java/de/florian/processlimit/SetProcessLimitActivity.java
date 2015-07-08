@@ -75,8 +75,8 @@ public class SetProcessLimitActivity extends PreferenceActivity {
             Class ActivityManagerNative = Class.forName("android.app.ActivityManagerNative");
             Class IActivityManager = Class.forName("android.app.IActivityManager");
 
-            Method getDefault =  ActivityManagerNative.getMethod("getDefault", null);
-            Object am = IActivityManager.cast(getDefault.invoke(ActivityManagerNative, null));
+            Method getDefault =  ActivityManagerNative.getMethod("getDefault", (Class[])null);
+            Object am = IActivityManager.cast(getDefault.invoke(ActivityManagerNative, (Class[])null));
 
             Class[] args = new Class[1];
             args[0] = int.class;
