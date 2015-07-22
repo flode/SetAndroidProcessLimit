@@ -1,28 +1,16 @@
 package de.florian.processlimit;
 
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 
 import dalvik.system.DexFile;
 
@@ -52,13 +40,17 @@ public class SetProcessLimitActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 ((ListPreference) preference).setValue((String)o);
-                setProcessLimit(Integer.parseInt(((ListPreference) preference).getValue()));
+                try {
+                    setProcessLimit(Integer.parseInt(((ListPreference) preference).getValue()));
+                } catch (NotPriviledgedException e) {
+                    Toast.makeText(SetProcessLimitActivity.this, "App is not installed as priviledged app! Please reread the readme file!", Toast.LENGTH_LONG).show();
+                }
                 return false;
             }
         });
     }
 
-    public static void setProcessLimit(int limit) {
+    public static void setProcessLimit(int limit) throws NotPriviledgedException {
         Log.d("de.florian.processlimit","New limit: " + Integer.toString(limit));
         DexFile df;
         try {
@@ -90,7 +82,11 @@ public class SetProcessLimitActivity extends PreferenceActivity {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-
+            throw new NotPriviledgedException();
         }
     }
+}
+
+class NotPriviledgedException extends Exception {
+
 }
