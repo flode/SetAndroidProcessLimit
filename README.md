@@ -13,6 +13,22 @@ The process limit will also automatically be set when the device is restarted.
 Caution: Only tested on Android 4.4.4, should work from 4.0 onward
 
 
+# Alternative way without installing the app
+It can be done with root access with a single command.
+
+    service call activity 51 i32 x
+
+Where x is the number of background processes you want.
+
+If the API changes in the future, it's easy to look it up again.
+http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.4.4_r1/android/app/IActivityManager.java?av=f
+
+Look for the line with SET_PROCESS_LIMIT_TRANSACTION
+
+Then just extrapolate that info to http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/DESIRED_ANDROID_VERSION/android/app/IActivityManager.java?av=f
+
+Replacing DESIRED_ANDROID_VERSION with the version you're interested in.
+
 # Licence
 
 This is free and unencumbered software released into the public domain.
