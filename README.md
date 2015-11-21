@@ -13,7 +13,8 @@ The process limit will also automatically be set when the device is restarted.
 Caution: Only tested on Android 4.4.4, should work from 4.0 onward
 
 
-# Alternative way without installing the app
+# Alternative ways without installing the app
+## Commandline
 It can be done with root access with a single command.
 
     service call activity 51 i32 x
@@ -28,6 +29,18 @@ Look for the line with SET_PROCESS_LIMIT_TRANSACTION
 Then just extrapolate that info to http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/DESIRED_ANDROID_VERSION/android/app/IActivityManager.java?av=f
 
 Replacing DESIRED_ANDROID_VERSION with the version you're interested in.
+
+
+## Tasker
+
+For Tasker users, another app-based mechanism to set this value is via Secure Settings, which does work for me on all of Android 2.3 ... 4.4 as of this writing (I have no 5.x devices to test):
+
+https://play.google.com/store/apps/details?id=com.intangibleobject.securesettings.plugin
+
+The function is Root Actions -> Background App Processes and offers the usual set of default/none/1/2/3/4 options. Secure Settings can be used without Tasker by creating a shortcut, but to run at boot, you need Tasker (or Locale or similar) to use Secure Settings as a plugin, or some other app capable of launching shortcuts at boot to trigger a Secure Settings shortcut action.
+
+(Tasker's profile context for boot-complete is Event -> System -> System Boot. The task it executes should contain an action Plugins -> Secure Settings using the above Secure Settings function.)
+
 
 # Licence
 
